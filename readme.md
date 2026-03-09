@@ -2,6 +2,8 @@
 
 **Data-Driven Insights to Reduce Margin Erosion**
 
+![Retail Sales Dashboard](/dashboard/dashboard.png)
+
 ---
 
 ## 📌 Executive Summary
