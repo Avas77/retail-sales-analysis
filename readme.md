@@ -84,10 +84,4 @@ I built an OLS model to quantify the "weight" of each business lever.
 3.  **Furniture Category Pivot:** Investigate the supply chain or shipping costs associated with Furniture, as it is the primary drag on the portfolio.
 4.  **Incentivize "High-Signal" Segments:** Shift marketing focus toward the Central Region and Technology category, which demonstrated the highest profit efficiency.
 
----
 
-## 🚀 Interview Talking Point
-
-> "In this project, I moved beyond just 'cleaning data' to performing **Inference Modeling**. I used OLS Regression not just to predict a number, but to provide an 'X-ray' of the business. By proving that Discounting was a 10x stronger driver of loss than Region, I was able to shift the conversation from 'Where should we sell?' to 'How should we price?'—which is a much more actionable lever for leadership."
-
----
