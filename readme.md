@@ -1,87 +1,155 @@
-# Case Study: Retail Profitability & Discount Optimization
-
-**Data-Driven Insights to Reduce Margin Erosion**
+# Retail Profitability & Discount Optimization  
+### Data-Driven Strategy to Reduce Margin Erosion
 
 ![Retail Sales Dashboard](/dashboard/dashboard.png)
 
----
+## Executive Summary
+Why are companies losing money despite strong sales?
 
-## 📌 Executive Summary
+This project analyzes ~10,000 retail transactions and identifies a key issue: aggressive discounting is systematically reducing profitability.
 
-This project analyzes ~10,000 retail transactions to identify the root causes of inconsistent profitability. Through Exploratory Data Analysis (EDA), ANOVA testing, and OLS Regression, the analysis reveals that **aggressive discounting** is the primary driver of losses, far outweighing the benefits of sales volume. The findings provide a roadmap for pricing guardrails and category-specific optimizations to reclaim lost margins.
+- 19% of all orders are loss-making  
+- Profit declines sharply beyond a 20% discount threshold  
+- Discounting is the largest negative driver of profit  
 
----
-
-## 🏢 Business Problem
-
-Despite strong top-line sales, the organization faced volatile net profits. I spearheaded this analysis to:
-
-1.  **Identify** the profile of loss-making orders.
-2.  **Quantify** the specific impact of discounts, regions, and product categories on the bottom line.
-3.  **Provide** actionable recommendations to transition from "growth at any cost" to "profitable growth."
+Using statistical analysis and regression modeling, this project provides actionable recommendations to shift from “growth at any cost” to “profitable growth.”
 
 ---
 
-## 📊 Dataset & Methodology
+## Business Problem
+Despite strong revenue, the business experienced inconsistent and volatile profitability.
 
-- **Scope:** ~10,000 transactional records.
-- **Features:** Sales, Profit, Quantity, Discount, Geography, and Product Hierarchy.
-- **Feature Engineering:** Calculated `Shipping_Days`, extracted `Order_Month/Year`, and generated dummy variables for categorical regression.
-- **Tech Stack:** Python (Pandas, NumPy), Statsmodels (OLS), SciPy (ANOVA), Matplotlib/Seaborn.
+Key objectives:
+- Identify the characteristics of loss-making transactions  
+- Quantify the impact of discounts, product categories, and regions on profit  
+- Recommend strategies to improve margins  
 
 ---
 
-## 🔍 Exploratory Data Analysis (EDA)
+## Dataset
+- ~10,000 transactional records  
+- Features include:
+  - Sales, Profit, Quantity, Discount  
+  - Product category and sub-category  
+  - Region and order date  
 
-### 1. The Profitability Gap
+---
 
-- **The Reality:** 19% of all orders are loss-making.
-- **The Extremes:** While the median profit is **$8.67**, outliers range from **$8,400** profit to **-$6,600** loss.
-- **Insight:** The company is effectively subsidizing one-fifth of its customer base. These losses are not "cost of doing business"—they are systemic value-destroyers.
+## Methodology
 
-### 2. The Discount "Cliff"
+### Exploratory Data Analysis (EDA)
+- Profit distribution and outlier detection  
+- Discount vs profit relationship  
+- Category and regional performance analysis  
 
-- **Threshold:** Profitability remains stable until the 20% discount mark.
-- **The Drop-off:** Discounts beyond 20% show a near-linear correlation with catastrophic margin loss.
-- **Insight:** "High-volume" sales at 70-80% discounts are mathematically impossible to make profitable regardless of quantity.
+### Statistical Testing
+- One-Way ANOVA used to test whether differences in profit across groups are statistically significant  
+
+### Predictive Modeling
+- Ordinary Least Squares (OLS) Regression  
+- Feature engineering:
+  - Shipping duration  
+  - Time-based features (month/year)  
+  - Categorical encoding (dummy variables)  
+
+---
+
+## Key Insights
+
+### Profitability Gap
+- 19% of transactions are unprofitable  
+- Median profit: $8.67  
+- Extreme losses reach up to -$6,600  
+
+The business is effectively subsidizing a significant portion of its transactions.
+
+---
+
+### Discount Threshold Effect
+- Profit remains stable until approximately a 20% discount  
+- Beyond this point, profit declines rapidly  
+- High discounts (70–80%) result in severe losses  
+
+Higher sales volume does not translate to profitability when discounting is excessive.
+
+---
+
+### Category and Regional Performance
+- Technology is the most profitable category  
+- Furniture contributes disproportionately to losses  
+- Category has a stronger impact on profitability than region  
+
+---
+
+### Regression Model Findings
+- R-squared: 33.6%  
+
+Key coefficients:
+- Discount: -$279.49 (strongest negative driver)  
+- Quantity: -$3.27 (bulk orders reduce profit)  
+- Technology category: +$49.10 (strongest positive contributor)  
+
+These results indicate that pricing strategy has a greater impact on profitability than sales volume.
+
+---
+
+## Model Considerations
+- The model explains approximately 34% of profit variability  
+- Results should be interpreted as directional rather than predictive  
+- Additional factors not captured may include:
+  - Shipping cost variability  
+  - Customer segmentation  
+  - Operational inefficiencies  
+
+---
+
+## Business Recommendations
+
+### Discount Control
+Implement discount limits at or below 20% and require approvals for higher discounts.
+
+### Bulk Pricing Review
+Reassess bulk discount strategies and introduce pricing floors to prevent margin loss.
+
+### Category Optimization
+Investigate cost structures in the Furniture category, particularly shipping and supply chain inefficiencies.
+
+### Strategic Focus
+Prioritize high-performing segments such as the Technology category and Central region.
+
+---
+
+## Business Impact
+Reducing excessive discounting has the potential to significantly lower the proportion of loss-making transactions and improve overall margin stability.
+
+---
+
+## Visualizations
+Include key charts such as:
+- Discount vs Profit  
   ![Discount vs Profit](insights/discount-profit.png)
 
-### 3. Category & Regional Performance
-
-- **Product Drivers:** **Technology** is the most profitable category, while **Furniture** contributes to a disproportionate number of losses (714 orders).
-- **Regional Nuance:** While the West region has high volume, the **Central region** showed higher baseline efficiency in the regression model when controlling for other factors.
-
+- Profit by category  
 ![Average Profit by Category](insights/profit-by-category.png)
-![Average Profit by Region](insights/profit-by-category.png)
+
+- Profit by region  
+![Average Profit by Region](insights/profit-by-region.png)
+---
+
+## Tech Stack
+- Python (Pandas, NumPy)  
+- Matplotlib, Seaborn  
+- SciPy (ANOVA)  
+- Statsmodels (OLS Regression)  
 
 ---
 
-## 🧪 Statistical Testing & Modeling
-
-### Statistical Significance (ANOVA)
-
-I performed a One-Way ANOVA to determine if profit variations across groups were real or random:
-
-- **Region (p = 0.048):** Statistically significant, but a weak driver of profit.
-- **Category (p < 0.001):** Highly significant. Product mix is a much stronger lever for profitability than geography.
-
-### Predictive Modeling (OLS Regression)
-
-I built an OLS model to quantify the "weight" of each business lever.
-
-- **Model Fit:** R-squared = 33.6%
-- **Key Coefficients:**
-  - **Discount (-$279.49):** The single largest negative driver. Every 1% increase in discount erodes profit by nearly $2.80.
-  - **Quantity (-$3.27):** Surprisingly negative, indicating that bulk orders are likely over-discounted or carry prohibitive shipping costs.
-  - **Category_Technology (+$49.10):** The strongest positive category compared to the Furniture baseline.
+## Key Takeaway
+Profitability is not driven by sales volume alone, but by disciplined pricing strategy. Uncontrolled discounting can significantly erode margins, even in high-growth environments.
 
 ---
 
-## 💡 Strategic Recommendations
-
-1.  **Implement Discount Guardrails:** Establish an automated approval workflow for any discount exceeding 20%.
-2.  **Quantity-Based Pricing Review:** Re-evaluate the "Bulk Discount" strategy. Currently, higher quantities are correlating with lower profits, suggesting a need for a tiered pricing floor.
-3.  **Furniture Category Pivot:** Investigate the supply chain or shipping costs associated with Furniture, as it is the primary drag on the portfolio.
-4.  **Incentivize "High-Signal" Segments:** Shift marketing focus toward the Central Region and Technology category, which demonstrated the highest profit efficiency.
-
+## Author
+Avas Bajracharya  
+Data Analytics | Software Engineer | Turning data into insights
 
